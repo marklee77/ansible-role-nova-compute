@@ -24,7 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "compute-002" do |machine|
-    machine.vm.box = "box-cutter/centos64"
+    #machine.vm.box = "box-cutter/centos64"
+    machine.vm.box = "ubuntu/trusty64"
     #machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/yum"
     machine.vm.hostname = "compute-002"
     machine.vm.network :private_network, ip: "10.1.0.4",
