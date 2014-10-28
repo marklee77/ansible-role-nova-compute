@@ -10,7 +10,7 @@
 
 - name: ensure the openstack rdo repository is enabled
   yum:
-    name: http://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-3.noarch.rpm
+    name: http://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-4.noarch.rpm
     state: present
 
 - name: ensure basic openstack packages are installed and up to date
