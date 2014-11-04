@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "compute-001" do |machine|
     machine.vm.box = "ubuntu/trusty64"
-    machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/apt"
+    #machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/apt"
     machine.vm.hostname = "compute-001"
     machine.vm.network :private_network, ip: "10.1.0.3",
                        :netmask => "255.255.0.0"
