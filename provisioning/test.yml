@@ -67,12 +67,6 @@
         user: demo
         role: admin
 
-    - name: update demo.openrc from template
-      template:
-        src: templates/demo.openrc
-        dest: "{{ ansible_env.PWD }}/demo.openrc"
-        owner: "{{ ansible_ssh_user }}"
-
     - name: ensure internal network is registered
       neutron_network:
         auth_url: "{{ openstack_identity_public_url }}"
