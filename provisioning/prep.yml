@@ -32,7 +32,9 @@
       changed_when: false
 
     - name: add masquerade rule if not present...
-      command: iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE
+      shell: >
+        iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -o eth0 -j MASQUERADE && 
+        invoke-rc.d iptables-persistent save
       when: ipt_masquerade|failed
 
 - hosts: all
