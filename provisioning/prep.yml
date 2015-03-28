@@ -1,4 +1,40 @@
----
+--
+- hosts: all
+  gather_facts: True
+  sudo: True
+  tasks:
+
+    - name: ensure required packages for prep are installed
+      apt:
+        pkg: "{{ item }}"
+        state: latest
+        update_cache: yes
+        cache_valid_time: 600
+      with_items:
+        - iptables-persistent
+        - python-mysqldb
+        - python-keystoneclient
+        - python-glanceclient
+        - python-novaclient
+        - python-neutronclient
+      when: ansible_distribution == "Ubuntu"
+
+    - name: enable net.ipv4.ip_forward in sysctl
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: "1"
+        state: present
+
+    - name: check to see if masquerade rule is present...
+      command: iptables -t nat -C POSTROUTING -s 10.1.0.0/16 -j MASQUERADE
+      register: ipt_masquerade
+      ignore_errors: yes
+      changed_when: false
+
+    - name: add masquerade rule if not present...
+      command: iptables -t nat -A POSTROUTING -s 10.1.0.0/16 -j MASQUERADE
+      when: ipt_masquerade|failed
+
 - hosts: all
   gather_facts: True
   sudo: True
@@ -17,21 +53,3 @@
     - marklee77.neutron-controller
     - marklee77.neutron-network
 
-- hosts: all
-  gather_facts: True
-  sudo: True
-  tasks:
-
-    - name: ensure required packages for prep are installed
-      apt:
-        pkg: "{{ item }}"
-        state: latest
-        update_cache: yes
-        cache_valid_time: 600
-      with_items:
-        - python-mysqldb
-        - python-keystoneclient
-        - python-glanceclient
-        - python-novaclient
-        - python-neutronclient
-      when: ansible_distribution == "Ubuntu"
