@@ -193,6 +193,7 @@
 
     - name: wait for ssh to become available
       wait_for:
+        delay: 10
         host: "{{ demo_floating_ip.public_ip }}"
         port: 22
 
