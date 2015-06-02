@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: controller
   sudo: False
   vars_files:
     - defaults/main.yml
