@@ -20,6 +20,8 @@ openstack_compute_repo_info:
     state: present
   repos: []
 
+openstack_compute_links: []
+
 openstack_compute_required_services:
   - openvswitch-switch
 

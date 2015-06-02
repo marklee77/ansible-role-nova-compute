@@ -43,6 +43,15 @@
   with_items: openstack_compute_package_info.pkgs
   when: openstack_compute_package_info.pkgs|length > 0
 
+- name: ensure required links are in place
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: yes
+  with_items: openstack_compute_links
+  when: openstack_compute_links|length > 0
+
 - name: ensure compute required services are started and enabled
   service: 
     name: "{{ item }}"
