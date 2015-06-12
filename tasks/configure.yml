@@ -89,9 +89,11 @@
 
 - name: restart nova services if necessary
   shell: >
-    ls /etc/init/nova-* | while read conf; do 
-      service $(basename ${conf} .conf) restart;
+    for file in /etc/init*/{,openstack-}nova-*; do 
+      [ -f $file ] && service $(basename $file .conf) restart; 
     done
+  args:
+    executable: /bin/bash
   when: modify_nova_ini|changed or
         modify_nova_compute_ini|changed
 
@@ -167,9 +169,11 @@
 
 - name: restart neutron services if necessary
   shell: >
-    ls /etc/init/neutron-* | grep -v ovs | while read conf; do
-      service $(basename ${conf} .conf) restart;
+    ls /etc/init*/neutron-* | grep -v ovs | while read file; do
+      [ -f $file ] && service $(basename $file .conf) restart;
     done
+  args:
+    executable: /bin/bash
   when: modify_neutron_ini|changed or modify_ml2_ini|changed
 
 - name: ensure nova and neutron sqlite are deleted
