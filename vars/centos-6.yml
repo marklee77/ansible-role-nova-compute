@@ -15,6 +15,7 @@ openstack_compute_package_info:
     - openstack-nova-compute
     - openstack-neutron-ml2
     - openstack-neutron-openvswitch
+  post_commands: []
 
 openstack_compute_repo_info:
   pkg_repo: yum
