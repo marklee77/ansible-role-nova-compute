@@ -1,4 +1,4 @@
-openstack_compute_package_info:
+openstack_nova_compute_package_info:
   pkg_mgr: apt
   args:
     pkg: "{{ item }}"
@@ -12,7 +12,7 @@ openstack_compute_package_info:
     - neutron-plugin-ml2
     - neutron-plugin-openvswitch-agent
 
-openstack_compute_repo_info:
+openstack_nova_compute_repo_info:
   pkg_repo: apt_repository
   args:
     repo: "{{ item }}"
@@ -20,13 +20,11 @@ openstack_compute_repo_info:
     state: present
   repos: []
 
-openstack_compute_links: []
+openstack_nova_compute_links: []
 
-openstack_compute_required_services:
+openstack_nova_compute_required_services:
   - openvswitch-switch
 
-openstack_compute_nova_services:
+openstack_nova_compute_services:
   - nova-compute
-
-openstack_compute_neutron_services:
   - neutron-plugin-openvswitch-agent
