@@ -12,6 +12,7 @@ openstack_nova_compute_package_info:
     - neutron-common
     - neutron-plugin-ml2
     - neutron-plugin-openvswitch-agent
+    - openvswitch-datapath-dkms
 
 openstack_nova_compute_repo_info:
   pkg_repo: apt_repository
@@ -26,6 +27,7 @@ openstack_nova_compute_repo_info:
 openstack_nova_compute_links: []
 
 openstack_nova_compute_required_services:
+  - openvswitch-force-reload-kmod
   - openvswitch-switch
 
 openstack_nova_compute_services:
