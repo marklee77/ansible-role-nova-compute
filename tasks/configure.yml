@@ -93,7 +93,7 @@
       service $(basename ${conf} .conf) restart;
     done
   when: modify_nova_ini|changed or
-        modify_nova_compute_conf|changed
+        modify_nova_compute_ini|changed
 
 - name: ensure neutron.conf is properly configured
   ini_file:
