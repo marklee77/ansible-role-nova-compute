@@ -92,8 +92,13 @@
     ls /etc/init*/*nova-* | while read file; do 
       service $(basename $file .conf) restart;
     done
-  when: modify_nova_ini|changed or
-        modify_nova_compute_ini|changed
+  register: restart_nova
+
+  #when: modify_nova_ini|changed or
+  #      modify_nova_compute_ini|changed
+
+- debug:
+    msg: "{{ restart_nova.stdout_lines }}"
 
 - name: ensure neutron.conf is properly configured
   ini_file:
@@ -170,7 +175,12 @@
     ls /etc/init*/neutron-* | grep -v ovs | while read file; do
       service $(basename $file .conf) restart || true;
     done
-  when: modify_neutron_ini|changed or modify_ml2_ini|changed
+  register: restart_neutron
+
+  #when: modify_neutron_ini|changed or modify_ml2_ini|changed
+
+- debug:
+    msg: "{{ restart_neutron.stdout_lines }}"
 
 - name: ensure nova and neutron sqlite are deleted
   file:
