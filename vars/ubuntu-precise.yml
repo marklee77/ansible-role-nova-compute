@@ -6,15 +6,14 @@ openstack_nova_compute_package_info:
     cache_valid_time: 600
     state: latest
   pre_pkgs:
+    - openvswitch-datapath-dkms
+    - openvswitch-switch
     - ubuntu-cloud-keyring
   pkgs:
     - "{{ openstack_compute_package }}"
     - neutron-common
     - neutron-plugin-ml2
     - neutron-plugin-openvswitch-agent
-    - openvswitch-datapath-dkms
-  post_commands:
-    - service openvswitch-force-reload-kmod start
 
 openstack_nova_compute_repo_info:
   pkg_repo: apt_repository

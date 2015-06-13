@@ -16,4 +16,4 @@
         - ../vars
 
 - include: install.yml
-- include: configure.yml
+#- include: configure.yml
