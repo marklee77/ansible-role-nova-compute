@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   config.vm.define "ubuntu-trusty", primary: true do |m|
-    m.vm.box = "ubuntu/trusty64"
+    m.vm.box = "ubuntu/precise64"
     m.vm.hostname="ubuntu-trusty"
     m.vm.network :private_network, ip: "10.1.0.2", :netmask => "255.255.0.0"
     m.vm.provider :virtualbox do |v|
