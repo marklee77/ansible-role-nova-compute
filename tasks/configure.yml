@@ -89,7 +89,7 @@
 
 - name: restart nova services if necessary
   shell: >
-    ls /etc/init*/nova-* | while read file; do 
+    ls /etc/init*/*nova-* | while read file; do 
       service $(basename $file .conf) restart;
     done
   when: modify_nova_ini|changed or
@@ -168,7 +168,7 @@
 - name: restart neutron services if necessary
   shell: >
     ls /etc/init*/neutron-* | grep -v ovs | while read file; do
-      service $(basename $file .conf) restart;
+      service $(basename $file .conf) restart || true;
     done
   when: modify_neutron_ini|changed or modify_ml2_ini|changed
 
