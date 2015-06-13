@@ -173,8 +173,8 @@
 - name: restart neutron services if necessary
   shell: >
     ls /etc/init*/neutron-* | grep -v ovs | while read file; do
-      service $(basename $file .conf) restart || true;
-    done
+      service $(basename $file .conf) restart;
+    done || true
   register: restart_neutron
 
   #when: modify_neutron_ini|changed or modify_ml2_ini|changed
