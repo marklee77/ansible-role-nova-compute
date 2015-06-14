@@ -65,21 +65,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           "{{ ansible_all_ipv4_addresses|ipaddr('10.1.0.0/16')|first }}"
       }
     end
-    #m.vm.provision "ansible" do |ansible|
-    #  ansible.playbook = "test.yml"
-    #  ansible.limit = "all"
-    #  ansible.groups = {
-    #    "controller" => ["ubuntu-precise"],
-    #    "compute" => ["ubuntu-precise"]
-    #  }
-    #  ansible.extra_vars = {
-    #    openstack_mysql_host: "10.1.0.2",
-    #    openstack_rabbitmq_host: "10.1.0.2",
-    #    openstack_identity_endpoint_host: "10.1.0.2",
-    #    openstack_image_endpoint_host: "10.1.0.2",
-    #    openstack_compute_endpoint_host: "10.1.0.2",
-    #    openstack_network_endpoint_host: "10.1.0.2"
-    #  }
-    #end
+    m.vm.provision "ansible" do |ansible|
+      ansible.playbook = "test.yml"
+      ansible.limit = "all"
+      ansible.groups = {
+        "controller" => ["ubuntu-precise"],
+        "compute" => ["ubuntu-precise"]
+      }
+      ansible.extra_vars = {
+        openstack_mysql_host: "10.1.0.2",
+        openstack_rabbitmq_host: "10.1.0.2",
+        openstack_identity_endpoint_host: "10.1.0.2",
+        openstack_image_endpoint_host: "10.1.0.2",
+        openstack_compute_endpoint_host: "10.1.0.2",
+        openstack_network_endpoint_host: "10.1.0.2"
+      }
+    end
   end
 end
