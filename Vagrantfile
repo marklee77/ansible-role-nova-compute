@@ -15,18 +15,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-   config.vm.define "ubuntu-trusty", autostart: false do |m|
-    m.vm.box = "ubuntu/trusty64"
-    m.vm.hostname="ubuntu-trusty"
+   config.vm.define "ubuntu-precise", autostart: false do |m|
+    m.vm.box = "ubuntu/precise64"
+    m.vm.hostname="ubuntu-precise"
     m.vm.network :private_network, ip: "10.1.0.4", :netmask => "255.255.0.0"
     m.vm.provider :virtualbox do |v|
       v.memory = 2048
     end
   end
   
-  config.vm.define "ubuntu-precise", primary: true do |m|
-    m.vm.box = "ubuntu/precise64"
-    m.vm.hostname="ubuntu-precise"
+  config.vm.define "ubuntu-trusty", primary: true do |m|
+    m.vm.box = "ubuntu/trusty64"
+    m.vm.hostname="ubuntu-trusty"
     m.vm.network :private_network, ip: "10.1.0.2", :netmask => "255.255.0.0"
     m.vm.provider :virtualbox do |v|
       v.memory = 2048
@@ -69,8 +69,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "test.yml"
       ansible.limit = "all"
       ansible.groups = {
-        "controller" => ["ubuntu-precise"],
-        "compute" => ["ubuntu-precise"]
+        "controller" => ["ubuntu-trusty"],
+        "compute" => ["ubuntu-trusty"]
       }
       ansible.extra_vars = {
         openstack_mysql_host: "10.1.0.2",
